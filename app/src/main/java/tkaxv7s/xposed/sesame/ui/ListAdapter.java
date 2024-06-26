@@ -1,5 +1,6 @@
 package tkaxv7s.xposed.sesame.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -17,16 +18,19 @@ import tkaxv7s.xposed.sesame.R;
 import tkaxv7s.xposed.sesame.entity.IdAndName;
 import tkaxv7s.xposed.sesame.util.Log;
 
+/**
+ * @author xiong
+ */
 public class ListAdapter extends BaseAdapter {
+    @SuppressLint("StaticFieldLeak")
     private static ListAdapter adapter;
 
     private static ListDialog.ListType listType;
 
     public static ListAdapter get(Context c) {
-        if (adapter == null)
+        if (adapter == null) {
             adapter = new ListAdapter(c);
-        adapter.findIndex = -1;
-        adapter.findWord = null;
+        }
         return adapter;
     }
 
@@ -36,8 +40,6 @@ public class ListAdapter extends BaseAdapter {
             viewHolderList = new ArrayList<>();
         }
         ListAdapter.listType = listType;
-        adapter.findIndex = -1;
-        adapter.findWord = null;
         return adapter;
     }
 
@@ -52,8 +54,9 @@ public class ListAdapter extends BaseAdapter {
     }
 
     public void setBaseList(List<? extends IdAndName> l) {
-        if (l != list)
+        if (l != list) {
             exitFind();
+        }
         list = l;
     }
 
@@ -73,15 +76,17 @@ public class ListAdapter extends BaseAdapter {
     }
 
     public int findLast(CharSequence cs) {
-        if (list == null || list.isEmpty())
+        if (list == null || list.isEmpty()) {
             return -1;
+        }
         if (!cs.equals(findWord)) {
             findIndex = -1;
             findWord = cs;
         }
         int i = findIndex;
-        if (i < 0)
+        if (i < 0) {
             i = list.size();
+        }
         for (; ; ) {
             i = (i + list.size() - 1) % list.size();
             IdAndName ai = list.get(i);
@@ -89,29 +94,33 @@ public class ListAdapter extends BaseAdapter {
                 findIndex = i;
                 break;
             }
-            if (findIndex < 0 && i == 0)
+            if (findIndex < 0 && i == 0) {
                 break;
+            }
         }
         notifyDataSetChanged();
         return findIndex;
     }
 
     public int findNext(CharSequence cs) {
-        if (list == null || list.isEmpty())
+        if (list == null || list.isEmpty()) {
             return -1;
+        }
         if (!cs.equals(findWord)) {
             findIndex = -1;
             findWord = cs;
         }
-        for (int i = findIndex; ; ) {
+        int i = findIndex;
+        while (true) {
             i = (i + 1) % list.size();
             IdAndName ai = list.get(i);
             if (ai.name.contains(cs)) {
                 findIndex = i;
                 break;
             }
-            if (findIndex < 0 && i == list.size() - 1)
+            if (findIndex < 0 && i == list.size() - 1) {
                 break;
+            }
         }
         notifyDataSetChanged();
         return findIndex;

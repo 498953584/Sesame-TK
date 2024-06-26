@@ -173,5 +173,7 @@
     <string name="omegakoi_town">Omegakoi Town</string>
     <string name="consume_gold">Consume Gold</string>
     <string name="use_special_food">Use Special Food</string>
+    <string name="alert">Alert</string>
+    <string name="are_you_sure">Are you sure you want to perform this operation?</string>
 
 </resources>

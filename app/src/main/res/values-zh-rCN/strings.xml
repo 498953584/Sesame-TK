@@ -169,5 +169,7 @@
     <string name="omegakoi_town">支小镇</string>
     <string name="consume_gold">支付宝消费金</string>
     <string name="use_special_food">使用特殊食品</string>
+    <string name="alert">警告</string>
+    <string name="are_you_sure">你确定要执行此操作吗？</string>
 
 </resources>

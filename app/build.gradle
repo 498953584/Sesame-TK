@@ -9,7 +9,7 @@ android {
     compileSdk 34
     defaultConfig {
         applicationId "tkaxv7s.xposed.sesame"
-        minSdk 21
+        minSdk 23
         //noinspection ExpiredTargetSdkVersion
         targetSdk 31
         versionCode 80
@@ -36,7 +36,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '30.0.2'
+    namespace 'tkaxv7s.xposed.sesame'
     applicationVariants.configureEach { variant ->
         variant.outputs.configureEach { output ->
             def outputFile = output.outputFile
@@ -54,7 +54,7 @@ dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
     implementation 'com.elvishew:xlog:1.11.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0' // 核心库
 
     normalImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.17.1'
     normalImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.1'

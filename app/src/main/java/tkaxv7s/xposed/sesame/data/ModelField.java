@@ -14,8 +14,11 @@ import tkaxv7s.xposed.sesame.R;
 
 import java.io.Serializable;
 
+/**
+ * @author xiong
+ */
 @Data
-public class ModelField implements Serializable {
+public abstract class ModelField implements Serializable {
 
     @JsonIgnore
     private String code;
@@ -73,8 +76,21 @@ public class ModelField implements Serializable {
         btn.setMaxHeight(180);
         btn.setPaddingRelative(40, 0, 40, 0);
         btn.setAllCaps(false);
-        btn.setOnClickListener(v -> Toast.makeText(context, "无配置项", Toast.LENGTH_SHORT).show());
+        btn.setOnClickListener(v -> {
+            onClickListener(context, btn);
+        });
         return btn;
     }
 
+    protected View createView(Context context){
+        View view = new View(context);
+        return view;
+    }
+
+    // 抽象方法，由子类实现点击事件
+    protected void onClickListener(Context context, View v) {
+        Toast.makeText(context, "无配置项", Toast.LENGTH_SHORT).show();
+    }
+
+    ;
 }

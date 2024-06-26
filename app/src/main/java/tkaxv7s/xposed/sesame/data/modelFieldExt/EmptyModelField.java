@@ -1,5 +1,6 @@
 package tkaxv7s.xposed.sesame.data.modelFieldExt;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -7,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import tkaxv7s.xposed.sesame.R;
@@ -15,14 +15,14 @@ import tkaxv7s.xposed.sesame.data.ModelField;
 
 public class EmptyModelField extends ModelField {
 
-    private final View.OnClickListener clickListener;
+    private final Runnable clickListener;
 
     public EmptyModelField(String code, String name) {
         super(code, name, null);
         this.clickListener = null;
     }
 
-    public EmptyModelField(String code, String name, View.OnClickListener clickListener) {
+    public EmptyModelField(String code, String name, Runnable clickListener) {
         super(code, name, null);
         this.clickListener = clickListener;
     }
@@ -49,7 +49,18 @@ public class EmptyModelField extends ModelField {
         btn.setPaddingRelative(40, 0, 40, 0);
         btn.setAllCaps(false);
         if (clickListener != null) {
-            btn.setOnClickListener(clickListener);
+            btn.setOnClickListener(v -> {
+                // 创建 AlertDialog.Builder 对象
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.alert)
+                        .setMessage(R.string.are_you_sure)
+                        .setPositiveButton(R.string.ok, (dialog, id) -> clickListener.run())
+                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                            dialog.dismiss();
+                        })
+                        .create()
+                        .show();
+            });
         } else {
             btn.setOnClickListener(v -> Toast.makeText(context, "无配置项", Toast.LENGTH_SHORT).show());
         }

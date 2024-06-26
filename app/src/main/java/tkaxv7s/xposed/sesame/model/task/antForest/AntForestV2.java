@@ -182,7 +182,7 @@ public class AntForestV2 extends ModelTask {
         modelFields.addField(photoGuangPan = new BooleanModelField("photoGuangPan", "绿色 | 光盘行动", false));
         modelFields.addField(photoGuangPanBefore = new TextModelField("photoGuangPanBefore", "绿色 | 光盘前图片ID", ""));
         modelFields.addField(photoGuangPanAfter = new TextModelField("photoGuangPanAfter", "绿色 | 光盘后图片ID", ""));
-        modelFields.addField(new EmptyModelField("photoGuangPanClear", "绿色 | 清空图片ID", v -> {
+        modelFields.addField(new EmptyModelField("photoGuangPanClear", "绿色 | 清空图片ID", () -> {
             photoGuangPanBefore.reset();
             photoGuangPanAfter.reset();
         }));

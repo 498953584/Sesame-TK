@@ -335,8 +335,9 @@ public class ListDialog {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View p1) {
-            if (edt_find.length() <= 0)
+            if (edt_find.length() <= 0) {
                 return;
+            }
             ListAdapter la = ListAdapter.get(p1.getContext());
             int index = -1;
             switch (p1.getId()) {
